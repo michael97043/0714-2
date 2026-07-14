@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1976d2">
+  <title>大愛社區中元普渡報名名單</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      color: #17324d;
+      background:
+        radial-gradient(circle at top left, rgba(100, 181, 246, 0.25), transparent 35%),
+        linear-gradient(180deg, #eaf5ff 0%, #f7fbff 55%, #ffffff 100%);
+    }
+
+    .page {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 22px 15px 40px;
+    }
+
+    .header {
+      position: relative;
+      overflow: hidden;
+      padding: 32px 20px 28px;
+      text-align: center;
+      color: #ffffff;
+      background: linear-gradient(135deg, #0d47a1, #1976d2 55%, #42a5f5);
+      border-radius: 24px 24px 12px 12px;
+      box-shadow: 0 12px 30px rgba(13, 71, 161, 0.24);
+    }
+
+    .header::before,
+    .header::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .header::before {
+      width: 150px;
+      height: 150px;
+      top: -70px;
+      right: -45px;
+    }
+
+    .header::after {
+      width: 90px;
+      height: 90px;
+      bottom: -45px;
+      left: -25px;
+    }
+
+    .header-icon {
+      position: relative;
+      z-index: 1;
+      font-size: 48px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .header h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(25px, 7vw, 36px);
+      line-height: 1.35;
+      letter-spacing: 1px;
+    }
+
+    .header p {
+      position: relative;
+      z-index: 1;
+      margin: 10px 0 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .event-info {
+      margin-top: 16px;
+      padding: 20px;
+      background: #ffffff;
+      border: 1px solid #d5e9fb;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(33, 100, 160, 0.1);
+    }
+
+    .event-info h2 {
+      margin: 0 0 15px;
+      color: #0d5fab;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .info-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 12px 14px;
+      background: #f1f8ff;
+      border-left: 5px solid #2196f3;
+      border-radius: 9px;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .info-icon {
+      flex: 0 0 auto;
+      width: 25px;
+      text-align: center;
+      font-size: 19px;
+    }
+
+    .info-label {
+      font-weight: 700;
+      color: #0d5fab;
+    }
+
+    .form-card {
+      margin-top: 16px;
+      padding: 23px 20px;
+      background: #ffffff;
+      border: 1px solid #d5e9fb;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(33, 100, 160, 0.1);
+    }
+
+    .form-title {
+      margin: 0 0 5px;
+      color: #0d5fab;
+      text-align: center;
+      font-size: 23px;
+    }
+
+    .form-subtitle {
+      margin: 0 0 22px;
+      color: #607d97;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #174f7e;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .required {
+      color: #e53935;
+    }
+
+    input {
+      width: 100%;
+      min-height: 50px;
+      padding: 12px 14px;
+      color: #17324d;
+      background: #fbfdff;
+      border: 1.5px solid #b8d8f2;
+      border-radius: 10px;
+      outline: none;
+      font-family: inherit;
+      font-size: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    input:focus {
+      background: #ffffff;
+      border-color: #1976d2;
+      box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.12);
+    }
+
+    input[readonly] {
+      color: #49677f;
+      background: #eef6fc;
+      cursor: default;
+    }
+
+    .hint {
+      display: block;
+      margin-top: 6px;
+      color: #71869a;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .submit-btn {
+      width: 100%;
+      min-height: 54px;
+      margin-top: 5px;
+      padding: 13px 18px;
+      color: #ffffff;
+      background: linear-gradient(135deg, #0d5fab, #2196f3);
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 7px 17px rgba(25, 118, 210, 0.25);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .submit-btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 4px 10px rgba(25, 118, 210, 0.2);
+    }
+
+    .notice {
+      margin-top: 16px;
+      padding: 15px;
+      color: #24577e;
+      background: #eaf5ff;
+      border: 1px dashed #64b5f6;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 17px;
+      padding: 17px;
+      color: #125a30;
+      background: #e8f7ee;
+      border: 1px solid #9bd4af;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+
+    .footer {
+      padding: 23px 10px 5px;
+      color: #52728d;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 12px 10px 28px;
+      }
+
+      .header {
+        padding: 27px 15px 24px;
+        border-radius: 20px 20px 10px 10px;
+      }
+
+      .header-icon {
+        font-size: 42px;
+      }
+
+      .event-info,
+      .form-card {
+        padding: 19px 15px;
+      }
+
+      .info-item {
+        padding: 11px 12px;
+        font-size: 15px;
+      }
+
+      input {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="header">
+      <div class="header-icon">🙏</div>
+      <h1>大愛社區中元普渡<br>報名名單</h1>
+      <p>誠摯邀請社區住戶共同參與</p>
+    </header>
+
+    <section class="event-info">
+      <h2>活動資訊</h2>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-icon">📅</span>
+          <div>
+            <span class="info-label">日期：</span>
+            8月22日（星期六）下午2點開始
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-icon">📍</span>
+          <div>
+            <span class="info-label">地點：</span>
+            大愛社區中庭廣場
+          </div>
+        </div>
+
+        <div class="info-item">
+          <span class="info-icon">💙</span>
+          <div>
+            <span class="info-label">費用：</span>
+            社區住戶免費
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="form-card">
+      <h2 class="form-title">住戶報名表</h2>
+      <p class="form-subtitle">請填寫以下資料，標示「＊」為必填欄位</p>
+
+      <form id="registrationForm">
+        <div class="form-group">
+          <label for="registrationTime">
+            報名時間
+          </label>
+          <input
+            type="text"
+            id="registrationTime"
+            name="報名時間"
+            readonly
+          >
+          <span class="hint">系統將自動記錄送出報名表的時間。</span>
+        </div>
+
+        <div class="form-group">
+          <label for="household">
+            戶號 <span class="required">＊</span>
+          </label>
+          <input
+            type="text"
+            id="household"
+            name="戶號"
+            placeholder="例如：A棟 3樓 38號"
+            maxlength="30"
+            autocomplete="off"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="participants">
+            參加人數 <span class="required">＊</span>
+          </label>
+          <input
+            type="number"
+            id="participants"
+            name="參加人數"
+            placeholder="請輸入參加人數"
+            min="1"
+            max="30"
+            inputmode="numeric"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="phone">
+            聯絡電話 <span class="required">＊</span>
+          </label>
+          <input
+            type="tel"
+            id="phone"
+            name="聯絡電話"
+            placeholder="例如：0912-345-678"
+            maxlength="20"
+            inputmode="tel"
+            autocomplete="tel"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="email">
+            E-mail <span class="required">＊</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="E-mail"
+            placeholder="例如：example@email.com"
+            maxlength="100"
+            inputmode="email"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <button type="submit" class="submit-btn">
+          確認送出報名
+        </button>
+
+        <div class="success-message" id="successMessage" role="status">
+          ✅ 報名資料已完成登記！<br>
+          感謝您參加大愛社區中元普渡活動。
+        </div>
+      </form>
+
+      <div class="notice">
+        📌 請確認戶號、參加人數及聯絡資料填寫正確。活動相關通知將透過您所填寫的電話或 E-mail 聯繫。
+      </div>
+    </section>
+
+    <footer class="footer">
+      大愛社區管理中心 敬上<br>
+      歡迎社區住戶踴躍參加
+    </footer>
+  </main>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+    const registrationTime = document.getElementById("registrationTime");
+    const successMessage = document.getElementById("successMessage");
+
+    function formatDateTime(date) {
+      return new Intl.DateTimeFormat("zh-TW", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        weekday: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      }).format(date);
+    }
+
+    function updateRegistrationTime() {
+      registrationTime.value = formatDateTime(new Date());
+    }
+
+    updateRegistrationTime();
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      updateRegistrationTime();
+
+      const registrationData = {
+        registrationTime: registrationTime.value,
+        household: document.getElementById("household").value.trim(),
+        participants: document.getElementById("participants").value,
+        phone: document.getElementById("phone").value.trim(),
+        email: document.getElementById("email").value.trim()
+      };
+
+      const savedData =
+        JSON.parse(localStorage.getItem("daaiPuduRegistrations")) || [];
+
+      savedData.push(registrationData);
+
+      localStorage.setItem(
+        "daaiPuduRegistrations",
+        JSON.stringify(savedData)
+      );
+
+      successMessage.style.display = "block";
+      successMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+      form.reset();
+      updateRegistrationTime();
+
+      setTimeout(function () {
+        successMessage.style.display = "none";
+      }, 6000);
+    });
+  </script>
+</body>
+</html>
